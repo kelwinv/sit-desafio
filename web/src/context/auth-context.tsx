@@ -44,10 +44,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await apiClient.login(email, password);
 
-      const userData = response.user;
+      const userData = response.data;
       setUser(userData);
 
-      apiClient.setToken(response.access_token);
+      apiClient.setToken(response.token);
       localStorage.setItem("taskmanager_user", JSON.stringify(userData));
 
       setIsLoading(false);
@@ -71,10 +71,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await apiClient.register(name, email, password);
 
-      const userData = response.user;
+      const userData = response.data;
       setUser(userData);
 
-      apiClient.setToken(response.access_token);
+      apiClient.setToken(response.token);
       localStorage.setItem("taskmanager_user", JSON.stringify(userData));
 
       setIsLoading(false);

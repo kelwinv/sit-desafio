@@ -1,6 +1,6 @@
 interface LoginResponse {
-  access_token: string;
-  user: {
+  token: string;
+  data: {
     id: string;
     name: string;
     email: string;
@@ -8,8 +8,8 @@ interface LoginResponse {
 }
 
 interface RegisterResponse {
-  access_token: string;
-  user: {
+  token: string;
+  data: {
     id: string;
     name: string;
     email: string;
