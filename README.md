@@ -1,4 +1,4 @@
-![Capa da Aplicação](./cover.png)
+![Capa da Aplicação](./_images/preview.png)
 
 Este projeto foi desenvolvido como parte de um desafio técnico proposto pela [SIT](https://www.sittrade.com.br).
 
