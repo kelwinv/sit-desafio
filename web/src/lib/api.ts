@@ -7,6 +7,15 @@ interface LoginResponse {
   };
 }
 
+interface RegisterResponse {
+  access_token: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+  };
+}
+
 class ApiClient {
   private baseURL: string;
   private token: string | null = null;
@@ -72,6 +81,17 @@ class ApiClient {
     return this.request<LoginResponse>("/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
+    });
+  }
+
+  async register(
+    name: string,
+    email: string,
+    password: string
+  ): Promise<RegisterResponse> {
+    return this.request<RegisterResponse>("/auth/register", {
+      method: "POST",
+      body: JSON.stringify({ name, email, password }),
     });
   }
 }
