@@ -19,7 +19,7 @@ export class UserResponseDto {
 
 export class AuthResponseDto {
   @ApiProperty({ description: 'Response message' })
-  message: string;
+  message: string[];
 
   @ApiProperty({ description: 'User data', type: UserResponseDto })
   data: UserResponseDto;

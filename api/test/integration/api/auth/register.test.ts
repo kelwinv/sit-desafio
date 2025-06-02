@@ -7,15 +7,15 @@ import {
   AuthResponseDto,
 } from 'src/auth/dto/auth-response.dto';
 import { CreateUsersDto } from 'src/users/dto/create-users.dto';
-import { PrismaClient } from '@prisma/client';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 describe('POST /auth/register', () => {
   let app: INestApplication<App>;
-  let prisma: PrismaClient;
+  let prisma: PrismaService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await testApp();
-    prisma = new PrismaClient();
+    prisma = app.get<PrismaService>(PrismaService);
   });
 
   afterAll(async () => {
