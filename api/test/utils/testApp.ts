@@ -1,4 +1,4 @@
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { TestingModule, Test } from '@nestjs/testing';
 import { AppModule } from 'src/app.module';
 import { App } from 'supertest/types';
@@ -9,6 +9,7 @@ async function testApp(): Promise<INestApplication<App>> {
   }).compile();
 
   const app = moduleFixture.createNestApplication();
+  app.useGlobalPipes(new ValidationPipe());
   await app.init();
   return app;
 }
