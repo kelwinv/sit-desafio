@@ -70,6 +70,10 @@ class ApiClient {
         );
       }
 
+      if (options.method === "DELETE") {
+        return {} as T;
+      }
+
       return await response.json();
     } catch (error) {
       console.error(`API request failed: ${endpoint}`, error);
@@ -93,6 +97,50 @@ class ApiClient {
       method: "POST",
       body: JSON.stringify({ name, email, password }),
     });
+  }
+
+  async getTasks(): Promise<Task[]> {
+    const { data: task } = await this.request<{ data: Task[] }>("/tasks");
+
+    return task;
+  }
+
+  async getTask(id: string): Promise<Task> {
+    const { data: task } = await this.request<{ data: Task }>(`/tasks/${id}`);
+    return task;
+  }
+
+  async createTask(
+    task: Omit<Task, "id" | "createdAt" | "updatedAt">
+  ): Promise<Task> {
+    const { data } = await this.request<{ data: Task }>("/tasks", {
+      method: "POST",
+      body: JSON.stringify(task),
+    });
+
+    return data;
+  }
+
+  async updateTask(
+    id: string,
+    task: Partial<Omit<Task, "id" | "createdAt" | "updatedAt">>
+  ): Promise<Task> {
+    const { data } = await this.request<{ data: Task }>(`/tasks/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(task),
+    });
+
+    return data;
+  }
+
+  async deleteTask(id: string): Promise<void> {
+    await this.request<void>(`/tasks/${id}`, {
+      method: "DELETE",
+    });
+  }
+
+  async healthCheck(): Promise<{ status: string }> {
+    return this.request<{ status: string }>("/health");
   }
 }
 
