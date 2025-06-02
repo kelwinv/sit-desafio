@@ -53,7 +53,7 @@ export class TaskErrorResponseDto {
   status: number;
 
   @ApiProperty({ description: 'Data (null for errors)' })
-  data: null;
+  data: any;
 
   @ApiProperty({ description: 'Error messages', type: [String] })
   error: string[];
